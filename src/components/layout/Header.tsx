@@ -15,7 +15,7 @@ function NavLink({ item, isActive }: { item: typeof primaryNav[number]; isActive
   return (
     <Link
       href={item.href}
-      className="relative flex items-center gap-1 rounded-md px-4 py-2 tracking-widest uppercase font-oswald text-charcoal hover:text-brand"
+      className={`relative flex items-center gap-1 rounded-md px-4 py-2 tracking-widest uppercase font-oswald hover:text-brand ${isActive ? "text-brand" : "text-charcoal"}`}
       aria-haspopup={item.children ? "true" : undefined}
     >
       {item.label}
@@ -23,7 +23,7 @@ function NavLink({ item, isActive }: { item: typeof primaryNav[number]; isActive
       {isActive && (
         <motion.div
           layoutId="nav-underline"
-          className="absolute bottom-0 left-2 right-2 h-[2.5px] rounded-full bg-brand"
+          className="absolute bottom-0 left-5 right-5 h-[2.5px] rounded-full bg-brand"
           transition={{ type: "spring", stiffness: 380, damping: 30 }}
         />
       )}
