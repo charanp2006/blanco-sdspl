@@ -7,12 +7,25 @@ import { images } from "@/constants/images";
 
 export function Footer() {
   return (
-    <footer className="bg-charcoal text-neutral-300">
+    <footer className="bg-charcoal-300 text-neutral-300">
       <div className="container-page grid gap-10 py-16 md:grid-cols-2 lg:grid-cols-4">
         <div>
           <Link href="/" className="flex items-center gap-2">
-            <Image src={images.brand.logo} alt="" width={40} height={40} className="h-10 w-10 rounded-full" />
-            <span className="font-montserrat text-lg font-black uppercase text-white">{brand.shortName}</span>
+            <Image
+              src={images.brand.logo}
+              alt="Blanco Logo"
+              width={480}
+              height={480}
+              className="h-10 w-auto object-contain rounded-[50%] p-[1.5px] bg-[#3e4095]"
+            />
+            <div className="flex flex-col leading-none">
+              <span className="font-montserrat text-lg font-black leading-tight tracking-[0.01em] text-white">
+                {brand.brandName}
+              </span>
+              <span className="font-oswald text-[10px] font-extrabold text-[#3e4095] tracking-[0.09em] uppercase">
+                {brand.service}
+              </span>
+            </div>
           </Link>
           <p className="mt-4 text-sm text-neutral-400">{brand.positioning}</p>
           <a
