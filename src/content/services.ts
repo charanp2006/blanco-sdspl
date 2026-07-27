@@ -1,26 +1,19 @@
 import type { Service } from "@/types";
 
-// SCOPE CORRECTION (post-Phase-1 client feedback):
-// Blanco's business is structural STEEL DETAILING only — not a multi-discipline
-// BIM/design practice. Every service below is a facet of that one discipline,
-// built around Tekla Structures and AISC compliance. The Phase 1 document's
-// broader 7-service list (which included Revit Modelling, PEB, Precast, R&D)
-// has been narrowed here; Phase 1 itself is left unedited per instruction.
-
 export const services: Service[] = [
   {
     slug: "structural-steel-detailing",
     name: "Structural Steel Detailing",
     shortDescription:
-      "AISC-compliant shop and erection drawings built in Tekla Structures for fabricators and contractors.",
+      "Shop and erection drawings produced in Tekla Structures, following AISC standards.",
     overview:
-      "End-to-end structural steel detailing for commercial, industrial, and institutional projects — from IFC drawings through fabrication-ready shop and erection packages, produced to AISC standards for USA clients.",
+      "Structural steel detailing covers the production of shop drawings, erection drawings, and associated documentation from structural design drawings. At Blanco, this work is produced in Tekla Structures and checked against AISC provisions.",
     process: [
-      { step: "Contract Review", description: "Scope, schedule, and connection design responsibility confirmed against project specs." },
-      { step: "3D Modelling", description: "Full structural model built in Tekla Structures, including connections and embeds." },
-      { step: "Shop Drawings", description: "Piece-by-piece fabrication drawings generated and checked." },
-      { step: "Erection Drawings", description: "Field-ready erection plans and elevations issued." },
-      { step: "QC & Checking", description: "Independent checking department reviews for accuracy before release." },
+      { step: "Drawing Review", description: "Structural design drawings and project specifications are reviewed for scope and requirements." },
+      { step: "3D Modelling", description: "A structural steel model is built in Tekla Structures, including connections and embeds." },
+      { step: "Shop Drawings", description: "Piece-by-piece fabrication drawings are generated from the model." },
+      { step: "Erection Drawings", description: "Erection plans and elevations are produced for field use." },
+      { step: "QC & Checking", description: "An independent checking department reviews all drawings for accuracy before issue." },
     ],
     deliverables: [
       "Tekla 3D model (.tekla / IFC)",
@@ -39,7 +32,7 @@ export const services: Service[] = [
       {
         question: "Do you provide connection design or only detailing?",
         answer:
-          "We provide both — connection design support (via RISA/RAM/IDEA StatiCa) alongside full Tekla-based detailing, depending on the scope your project requires.",
+          "Both are available — connection design support (via RISA/RAM/IDEA StatiCa) alongside full Tekla-based detailing, depending on the project scope.",
       },
       {
         question: "What formats do you deliver models and drawings in?",
@@ -51,22 +44,22 @@ export const services: Service[] = [
   {
     slug: "connection-design",
     name: "Connection Design",
-    shortDescription: "AISC-code-checked connection engineering, integrated directly into the detailing workflow.",
+    shortDescription: "Connection engineering and AISC code-checking integrated into the detailing workflow.",
     overview:
-      "Connection design and code-checking performed alongside detailing — not handed off separately — so geometry, capacity, and drawings stay in sync from model to shop floor.",
+      "Connection design involves sizing steel connections and verifying them against AISC codes. At Blanco, this work is performed alongside detailing so that geometry, capacity, and drawings remain consistent.",
     process: [
-      { step: "Load Review", description: "Reaction/loading data reviewed against the design drawings." },
-      { step: "Connection Sizing", description: "Connections sized and checked in IDEA StatiCa / RISA / RAM." },
-      { step: "AISC Code Check", description: "Every connection verified against AISC provisions." },
-      { step: "Model Integration", description: "Final connection geometry built into the Tekla model." },
+      { step: "Load Review", description: "Reaction and loading data are reviewed against the design drawings." },
+      { step: "Connection Sizing", description: "Connections are sized and analysed in IDEA StatiCa / RISA / RAM." },
+      { step: "AISC Code Check", description: "Each connection is verified against AISC provisions." },
+      { step: "Model Integration", description: "Final connection geometry is built into the Tekla model." },
     ],
     deliverables: ["Connection design calculations", "AISC code-check reports", "Integrated Tekla connections"],
-    benefits: ["Single point of accountability for geometry + capacity", "Reduced RFIs at fabrication stage"],
+    benefits: ["Geometry and capacity handled in one workflow", "Reduced RFIs during fabrication"],
     softwareUsed: ["idea-statica", "risa", "ram", "tekla-structures"],
     faqs: [
       {
         question: "Which code do you design to?",
-        answer: "AISC (American Institute of Steel Construction) provisions, as required by our USA client base.",
+        answer: "AISC (American Institute of Steel Construction) provisions.",
       },
     ],
     relatedServices: ["structural-steel-detailing", "tekla-modelling"],
@@ -74,22 +67,22 @@ export const services: Service[] = [
   {
     slug: "tekla-modelling",
     name: "Tekla Modelling",
-    shortDescription: "High-detail 3D structural steel models built for clash-free fabrication and erection.",
+    shortDescription: "3D structural steel models built in Tekla Structures for fabrication and erection.",
     overview:
-      "Dedicated Tekla Structures modelling — from IFC coordination models through fully detailed, fabrication-ready structural models — for detailing teams, GCs, and fabricators who need the model itself as the deliverable.",
+      "Tekla Structures modelling produces detailed 3D models of structural steel framing. These models can serve as the basis for drawing generation, clash coordination, or as standalone deliverables.",
     process: [
-      { step: "Model Setup", description: "Grids, levels, and project standards configured in Tekla." },
-      { step: "Structural Modelling", description: "Primary and secondary steel modelled to fabrication tolerance." },
-      { step: "Clash Coordination", description: "Model checked against architectural/MEP references where supplied." },
-      { step: "Deliverable Export", description: "Model exported in native and IFC formats." },
+      { step: "Model Setup", description: "Grids, levels, and project standards are configured in Tekla." },
+      { step: "Structural Modelling", description: "Primary and secondary steel members are modelled to fabrication tolerance." },
+      { step: "Clash Coordination", description: "The model is checked against architectural/MEP references where available." },
+      { step: "Deliverable Export", description: "The model is exported in native and IFC formats." },
     ],
     deliverables: ["Tekla 3D model", "IFC export", "Clash/coordination report"],
-    benefits: ["Model-first accuracy", "Faster downstream drawing generation", "Tekla-certified modelling team"],
+    benefits: ["Model-based accuracy", "Foundation for downstream drawing generation", "Tekla-certified modelling team"],
     softwareUsed: ["tekla-structures"],
     faqs: [
       {
-        question: "Can you work from our existing Tekla model?",
-        answer: "Yes — we regularly pick up, extend, and correct existing Tekla models mid-project.",
+        question: "Can you work from an existing Tekla model?",
+        answer: "Yes — existing Tekla models can be picked up, extended, or corrected mid-project.",
       },
     ],
     relatedServices: ["structural-steel-detailing", "material-takeoffs"],
@@ -97,16 +90,16 @@ export const services: Service[] = [
   {
     slug: "material-takeoffs",
     name: "Material Take-offs",
-    shortDescription: "Accurate bolt lists, BOMs, and BOQs generated directly from the detailed Tekla model.",
+    shortDescription: "Bolt lists, BOMs, and BOQs generated from the detailed Tekla model.",
     overview:
-      "Material take-offs generated directly from the Tekla model — not estimated separately — so procurement and fabrication quantities match the drawings exactly.",
+      "Material take-offs are extracted directly from the Tekla model, producing quantities for bolts, plates, and members that correspond to the detailed drawings.",
     process: [
-      { step: "Model Finalization", description: "Take-offs pulled only from a checked, finalized model." },
-      { step: "Quantity Extraction", description: "Bolts, plates, and members extracted by piece mark." },
-      { step: "Report Formatting", description: "Delivered in the client's preferred BOM/BOQ format." },
+      { step: "Model Finalization", description: "Take-offs are pulled from a checked and finalized model." },
+      { step: "Quantity Extraction", description: "Bolts, plates, and members are extracted by piece mark." },
+      { step: "Report Formatting", description: "Quantities are delivered in the required BOM/BOQ format." },
     ],
     deliverables: ["Bolt lists", "Bill of materials (BOM)", "Bill of quantities (BOQ)"],
-    benefits: ["Model-accurate quantities", "Reduced fabrication over/under-ordering"],
+    benefits: ["Model-accurate quantities", "Consistent with fabrication drawings"],
     softwareUsed: ["tekla-structures"],
     faqs: [
       {
@@ -119,21 +112,21 @@ export const services: Service[] = [
   {
     slug: "autocad-drafting-support",
     name: "AutoCAD Drafting Support",
-    shortDescription: "2D drafting and documentation support for teams working outside a full Tekla workflow.",
+    shortDescription: "2D drafting and documentation in AutoCAD for shop drawings and layout plans.",
     overview:
-      "Standalone 2D AutoCAD drafting for shop drawings, layout plans, and documentation — for clients who need drafting support without a full 3D detailing engagement.",
+      "Standalone 2D drafting in AutoCAD for shop drawings, layout plans, and related documentation — available as a support service independent of full 3D detailing.",
     process: [
-      { step: "Reference Review", description: "Source drawings/sketches reviewed for intent." },
-      { step: "Drafting", description: "Drawings produced to client CAD standards." },
-      { step: "Checking", description: "Independent review before issue." },
+      { step: "Reference Review", description: "Source drawings and sketches are reviewed." },
+      { step: "Drafting", description: "Drawings are produced to the required CAD standards." },
+      { step: "Checking", description: "Independent review is performed before issue." },
     ],
     deliverables: ["AutoCAD drawing sets (DWG/PDF)"],
-    benefits: ["Flexible, drawing-only engagements", "Fast turnaround for smaller scopes"],
+    benefits: ["Available as a standalone service", "Suitable for smaller or drawing-only scopes"],
     softwareUsed: ["autocad"],
     faqs: [
       {
-        question: "Is this available as a standalone service?",
-        answer: "Yes — this can be engaged independently of full Tekla-based detailing.",
+        question: "Is this available independently of Tekla-based detailing?",
+        answer: "Yes — AutoCAD drafting support can be engaged on its own.",
       },
     ],
     relatedServices: ["structural-steel-detailing"],

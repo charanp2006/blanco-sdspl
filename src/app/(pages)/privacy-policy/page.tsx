@@ -24,17 +24,17 @@ export default function PrivacyPolicyPage() {
             {brand.name} ("Blanco", "we", "us") respects your privacy. This placeholder policy covers
             information submitted through our contact, quote request, job application, and newsletter forms.
           </p>
-          <h2 className="font-display text-h4 text-charcoal">Information We Collect</h2>
+          <h2 className="text-h4 text-charcoal">Information We Collect</h2>
           <p>
             Name, email, company, phone number, project details, and resume/CV files submitted voluntarily
             through this site's forms.
           </p>
-          <h2 className="font-display text-h4 text-charcoal">How We Use It</h2>
+          <h2 className="text-h4 text-charcoal">How We Use It</h2>
           <p>
             To respond to quote requests and inquiries, evaluate job applications, and — where you've opted
             in — send occasional newsletter updates.
           </p>
-          <h2 className="font-display text-h4 text-charcoal">Contact</h2>
+          <h2 className="text-h4 text-charcoal">Contact</h2>
           <p>
             Questions about this policy can be sent to{" "}
             <a href={`mailto:${brand.contact.emails.admin}`} className="text-brand underline">

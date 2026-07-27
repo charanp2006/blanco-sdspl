@@ -12,7 +12,7 @@ export function Footer() {
         <div>
           <Link href="/" className="flex items-center gap-2">
             <Image src={images.brand.logo} alt="" width={40} height={40} className="h-10 w-10 rounded-full" />
-            <span className="font-display text-lg font-bold text-white">{brand.shortName}</span>
+            <span className="font-montserrat text-lg font-black uppercase text-white">{brand.shortName}</span>
           </Link>
           <p className="mt-4 text-sm text-neutral-400">{brand.positioning}</p>
           <a
@@ -27,7 +27,7 @@ export function Footer() {
         </div>
 
         <div>
-          <h3 className="font-display text-sm font-semibold uppercase tracking-wide text-white">Services</h3>
+          <h3 className="text-sm font-semibold uppercase tracking-wide text-white">Services</h3>
           <ul className="mt-4 space-y-2 text-sm">
             {footerNav.services.map((s) => (
               <li key={s.href}>
@@ -40,7 +40,7 @@ export function Footer() {
         </div>
 
         <div>
-          <h3 className="font-display text-sm font-semibold uppercase tracking-wide text-white">Company</h3>
+          <h3 className="text-sm font-semibold uppercase tracking-wide text-white">Company</h3>
           <ul className="mt-4 space-y-2 text-sm">
             {footerNav.company.map((c) => (
               <li key={c.href}>
@@ -60,7 +60,7 @@ export function Footer() {
         </div>
 
         <div>
-          <h3 className="font-display text-sm font-semibold uppercase tracking-wide text-white">Contact</h3>
+          <h3 className="text-sm font-semibold uppercase tracking-wide text-white">Contact</h3>
           <ul className="mt-4 space-y-3 text-sm">
             <li className="flex gap-2">
               <MapPin className="mt-0.5 h-4 w-4 flex-shrink-0" aria-hidden />

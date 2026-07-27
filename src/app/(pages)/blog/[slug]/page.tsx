@@ -34,8 +34,8 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
 
       <article className="section-spacing">
         <div className="container-page max-w-3xl">
-          <p className="font-mono text-xs font-semibold uppercase tracking-widest text-brand">{post.category}</p>
-          <h1 className="mt-2 font-display text-h1 text-charcoal">{post.title}</h1>
+          <p className="font-oswald text-xs font-medium uppercase tracking-widest text-brand">{post.category}</p>
+          <h1 className="mt-2 text-h1 text-charcoal">{post.title}</h1>
           <p className="mt-3 text-sm text-neutral-500">
             {post.author} · {new Date(post.publishedAt).toLocaleDateString("en-US", { dateStyle: "long" })}
           </p>
@@ -57,7 +57,7 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
       {related.length > 0 && (
         <section className="section-spacing bg-neutral-50">
           <div className="container-page">
-            <h2 className="font-display text-h3 text-charcoal">Related Articles</h2>
+            <h2 className="text-h3 text-charcoal">Related Articles</h2>
             <div className="mt-8 grid gap-6 sm:grid-cols-2">
               {related.map((r) => (
                 <Link key={r.slug} href={`/blog/${r.slug}`}>

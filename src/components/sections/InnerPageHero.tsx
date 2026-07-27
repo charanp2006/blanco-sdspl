@@ -18,7 +18,7 @@ export function InnerPageHero({
   return (
     <section className={cn("border-b border-neutral-100 bg-neutral-50", className)}>
       <div className="container-page py-16 md:py-20">
-        <h1 className="animate-fade-in-up font-display text-h1 text-charcoal">{title}</h1>
+        <h1 className="animate-fade-in-up text-h1 text-charcoal">{title}</h1>
         {description && (
           <p className="mt-3 max-w-2xl animate-fade-in-up-delay text-neutral-600">{description}</p>
         )}

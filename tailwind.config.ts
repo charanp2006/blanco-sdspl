@@ -46,9 +46,13 @@ const config: Config = {
         warning: "#D97706",
       },
       fontFamily: {
-        display: ["var(--font-plus-jakarta)", "sans-serif"],
-        body: ["var(--font-inter)", "sans-serif"],
-        mono: ["var(--font-plex-mono)", "monospace"],
+        display: ["var(--font-oswald)", "sans-serif"],
+        body: ["var(--font-outfit)", "sans-serif"],
+        mono: ["var(--font-dm-mono)", "monospace"],
+        montserrat: ["var(--font-montserrat)", "sans-serif"],
+        oswald: ["var(--font-oswald)", "sans-serif"],
+        outfit: ["var(--font-outfit)", "sans-serif"],
+        "dm-mono": ["var(--font-dm-mono)", "monospace"],
       },
       fontSize: {
         display: ["3.5rem", { lineHeight: "1.1", fontWeight: "700" }], // 56px
@@ -79,10 +83,15 @@ const config: Config = {
           "0%": { opacity: "0", transform: "translateY(16px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
+        marquee: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
       },
       animation: {
         "fade-in-up": "fade-in-up 0.4s ease-out both",
         "fade-in-up-delay": "fade-in-up 0.4s ease-out 0.1s both",
+        marquee: "marquee 30s linear infinite",
       },
     },
   },

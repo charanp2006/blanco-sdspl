@@ -29,7 +29,7 @@ export function Accordion({ items }: { items: AccordionItem[] }) {
                 aria-expanded={isOpen}
                 aria-controls={panelId}
                 onClick={() => setOpenIndex(isOpen ? null : index)}
-                className="flex w-full items-center justify-between gap-4 py-5 text-left font-display text-base font-semibold text-charcoal focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+                className="flex w-full items-center justify-between gap-4 py-5 text-left text-base font-semibold text-charcoal focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
               >
                 {item.question}
                 <ChevronDown
@@ -47,7 +47,7 @@ export function Accordion({ items }: { items: AccordionItem[] }) {
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.25, ease: "easeInOut" }}
+                  transition={{ duration: 0.35, ease: "easeInOut" }}
                   className="overflow-hidden"
                 >
                   <p className="pb-5 text-sm text-neutral-600">{item.answer}</p>

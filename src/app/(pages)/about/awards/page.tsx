@@ -19,7 +19,7 @@ export default function AwardsPage() {
       <Breadcrumbs items={[{ label: "About", href: "/about/overview" }, { label: "Awards" }]} />
       <InnerPageHero
         title="Awards & Milestones"
-        description="Eight years of measured growth, backed by AISC-compliant delivery on every project."
+        description="Key milestones and certifications from Blanco's years of operation."
       />
 
       <section className="section-spacing">
@@ -34,7 +34,7 @@ export default function AwardsPage() {
                 >
                   <ShieldCheck className="mt-0.5 h-5 w-5 flex-shrink-0 text-brand" aria-hidden />
                   <div>
-                    <h3 className="font-display text-base font-semibold text-charcoal">{award.title}</h3>
+                    <h3 className="text-base font-semibold text-charcoal">{award.title}</h3>
                     <p className="mt-1 text-sm text-neutral-600">{award.description}</p>
                   </div>
                 </RevealOnScroll>
