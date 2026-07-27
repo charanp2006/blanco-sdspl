@@ -3,24 +3,52 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Menu, Search } from "lucide-react";
 import { primaryNav } from "@/constants/nav";
 import { images } from "@/constants/images";
 import { brand } from "@/constants/brand";
-import { Button } from "@/components/ui/Button";
 import { MobileNav } from "@/components/layout/MobileNav";
 
+function NavLink({ item, isActive }: { item: typeof primaryNav[number]; isActive: boolean }) {
+  return (
+    <Link
+      href={item.href}
+      className={`relative flex items-center gap-1 rounded-md px-4 py-2 tracking-widest uppercase font-oswald hover:text-brand ${isActive ? "text-brand" : "text-charcoal"}`}
+      aria-haspopup={item.children ? "true" : undefined}
+    >
+      {item.label}
+      {item.children && <ChevronDown className="h-4.5 w-4" aria-hidden />}
+      {isActive && (
+        <motion.div
+          layoutId="nav-underline"
+          className="absolute bottom-0 left-5 right-5 h-[2.5px] rounded-full bg-brand"
+          transition={{ type: "spring", stiffness: 380, damping: 30 }}
+        />
+      )}
+    </Link>
+  );
+}
+
 export function Header() {
+  const pathname = usePathname();
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const isNavActive = (item: typeof primaryNav[number]) => {
+    if (item.href === pathname) return true;
+    if (item.children) {
+      return item.children.some((child) => pathname.startsWith(child.href));
+    }
+    return false;
+  };
 
   return (
     <header className="sticky top-0 z-40 border-b border-neutral-100 bg-white backdrop-blur">
       <div className="flex h-20 items-center justify-between width-full max-w-[1280px] px-4 py-2 mx-auto">
         <Link href="/" className="flex items-center gap-2" aria-label={brand.name}>
           <Image src={images.brand.logo} alt="Blanco Logo" width={480} height={480} className="h-12 w-auto object-contain rounded-[50%] p-[1.5px] bg-[#3e4095]" />
-          {/* <span className="font-display text-lg font-bold text-charcoal">{brand.shortName}</span> */}
           <div className="flex flex-col leading-none ">
             <span className="font-montserrat text-xl font-black leading-tight tracking-[0.01em]">{brand.brandName}</span>
             <span className="font-oswald text-[11px] font-extrabold text-[#3e4095] tracking-[0.09em] uppercase">{brand.service}</span>
@@ -35,15 +63,7 @@ export function Header() {
               onMouseEnter={() => item.children && setOpenMenu(item.label)}
               onMouseLeave={() => item.children && setOpenMenu(null)}
             >
-              <Link
-                href={item.href}
-                className="flex items-center gap-1 rounded-md px-4 py-2 tracking-widest uppercase font-oswald text-charcoal hover:text-brand"
-                aria-haspopup={item.children ? "true" : undefined}
-                aria-expanded={item.children ? openMenu === item.label : undefined}
-              >
-                {item.label}
-                {item.children && <ChevronDown className="h-4.5 w-4" aria-hidden />}
-              </Link>
+              <NavLink item={item} isActive={isNavActive(item)} />
 
               <AnimatePresence>
                 {item.children && openMenu === item.label && (
@@ -54,18 +74,21 @@ export function Header() {
                     transition={{ duration: 0.25, ease: "easeOut" }}
                     className="absolute left-0 top-full grid w-80 gap-1 rounded-card border border-neutral-100 bg-white p-3 shadow-card-hover"
                   >
-                    {item.children.map((child) => (
-                      <Link
-                        key={child.href}
-                        href={child.href}
-                        className="rounded-md px-3 py-2.5 hover:bg-brand-50 font-outfit"
-                      >
-                        <span className="block text-sm font-semibold text-charcoal">{child.label}</span>
-                        {child.description && (
-                          <span className="block text-xs text-neutral-500">{child.description}</span>
-                        )}
-                      </Link>
-                    ))}
+                    {item.children.map((child) => {
+                      const childActive = pathname === child.href;
+                      return (
+                        <Link
+                          key={child.href}
+                          href={child.href}
+                          className={`rounded-md px-3 py-2.5 hover:bg-brand-50 font-outfit ${childActive ? "bg-brand-50" : ""}`}
+                        >
+                          <span className={`block text-sm font-semibold ${childActive ? "text-brand" : "text-charcoal"}`}>{child.label}</span>
+                          {child.description && (
+                            <span className="block text-xs text-neutral-500">{child.description}</span>
+                          )}
+                        </Link>
+                      );
+                    })}
                   </motion.div>
                 )}
               </AnimatePresence>
