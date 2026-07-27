@@ -3,7 +3,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 const baseStyles =
-  "inline-flex items-center justify-center gap-2 rounded-pill font-display font-semibold transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand disabled:opacity-50 disabled:pointer-events-none";
+  "inline-flex uppercase tracking-widest items-center justify-center gap-2 rounded-pill font-oswald font-medium transition-all duration-300 ease-out focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand disabled:opacity-50 disabled:pointer-events-none";
 
 const variants = {
   primary: "bg-brand text-white hover:bg-brand-dark hover:-translate-y-0.5 hover:shadow-card",

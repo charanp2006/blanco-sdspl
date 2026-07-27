@@ -46,7 +46,6 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         eyebrow="Service"
         title={service.name}
         description={service.overview}
-        primaryCta={{ label: "Request a Quote", href: "/contact" }}
         image={images.hero.steelDetailingWork}
       />
 
@@ -97,12 +96,12 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
 
       <section className="section-spacing bg-brand py-16 text-center text-white">
         <div className="container-page">
-          <h2 className="font-display text-h2">Ready to discuss your {service.name.toLowerCase()} scope?</h2>
+          <h2 className="text-h2">Learn more about {service.name.toLowerCase()}</h2>
           <a
             href="/contact"
-            className="mt-6 inline-flex rounded-pill bg-white px-8 py-4 font-display font-semibold text-brand hover:bg-brand-50"
+            className="mt-6 inline-flex rounded-pill bg-white px-8 py-4 font-oswald font-medium text-brand hover:bg-brand-50"
           >
-            Request a Quote
+            Contact Us
           </a>
         </div>
       </section>

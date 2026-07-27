@@ -20,7 +20,7 @@ export default function LifeAtBlancoPage() {
       <Breadcrumbs items={[{ label: "About", href: "/about/overview" }, { label: "Life at Blanco" }]} />
       <InnerPageHero
         title="Life at Blanco"
-        description="We work as a team, and we work for a team — we value our employees more than anything."
+        description="An overview of the working environment, training programs, and employee benefits at Blanco."
       />
 
       <section className="section-spacing">

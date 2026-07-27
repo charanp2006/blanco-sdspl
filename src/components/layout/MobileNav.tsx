@@ -80,7 +80,7 @@ export function MobileNav({ open, onClose }: { open: boolean; onClose: () => voi
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
-            transition={{ type: "tween", duration: 0.25 }}
+            transition={{ type: "tween", duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
             role="dialog"
             aria-modal="true"
             aria-label="Mobile navigation"
@@ -99,7 +99,7 @@ export function MobileNav({ open, onClose }: { open: boolean; onClose: () => voi
                     <Link
                       href={item.href}
                       onClick={onClose}
-                      className="flex-1 py-3 font-display text-base font-semibold text-charcoal"
+                      className="flex-1 py-3 text-base font-semibold text-charcoal"
                     >
                       {item.label}
                     </Link>

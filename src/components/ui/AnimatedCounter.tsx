@@ -22,7 +22,7 @@ export function AnimatedCounter({
 
   return (
     <div ref={ref as React.RefObject<HTMLDivElement>} className="text-center">
-      <div className={`font-display text-4xl font-bold md:text-5xl ${light ? "text-white" : "text-brand"}`}>
+      <div className={`text-4xl font-bold md:text-5xl ${light ? "text-white" : "text-brand"}`}>
         {formatNumber(current)}
         {suffix}
       </div>

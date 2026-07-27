@@ -1,11 +1,13 @@
 export const brand = {
   name: "Blanco Steel Detailing Services Pvt. Ltd.",
-  shortName: "Blanco",
+  brandName: "Blanco",
+  service: "Steel Detailing Services",
+  shortName: "Blanco SDSPL",
   sisterCompany: "Blanka Engineering & Construction Pvt Ltd",
-  founded: 2018, // "8th successful year" as of 2026 per brochure
+  founded: 2018,
   tagline: "Precision. Passion. Performance.",
   positioning:
-    "AISC-compliant structural steel detailing, built on Tekla Structures, for USA construction and fabrication clients.",
+    "A structural steel detailing company based in Mysore, India, specializing in AISC-compliant detailing using Tekla Structures.",
   contact: {
     address:
       "#3051, 1st, 2nd & 3rd Floor, SPYR Arcade, Ring Road Near Mahamane Circle, Dattagalli 3rd Stage, Mysore, Karnataka, India – 570033",
@@ -21,8 +23,3 @@ export const brand = {
     linkedin: "https://www.linkedin.com/company/blanco-steel-detailing-services-pvt-ltd",
   },
 } as const;
-
-// Scope correction (client feedback, post-Phase-1):
-// Blanco is a pure structural STEEL DETAILING company — not a multi-discipline
-// BIM/design shop. Primary tool is Tekla Structures; the core credibility claim
-// is AISC compliance. Service and software content in /src/content reflects this.

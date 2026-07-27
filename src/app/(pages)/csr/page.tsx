@@ -18,7 +18,7 @@ export default function CSRPage() {
       <Breadcrumbs items={[{ label: "CSR" }]} />
       <InnerPageHero
         title="Corporate Social Responsibility"
-        description="Blanco believes in giving back to the communities that support our team and our clients."
+        description="An overview of Blanco's approach to corporate social responsibility."
         className="bg-brand-50/40"
       />
 

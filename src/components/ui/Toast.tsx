@@ -37,6 +37,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
               initial={{ opacity: 0, y: 12, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
               className={cn(
                 "flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-medium text-white shadow-card-hover",
                 toast.variant === "success" ? "bg-success" : "bg-error",

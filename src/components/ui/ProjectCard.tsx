@@ -12,14 +12,14 @@ export function ProjectCard({ project }: { project: Project }) {
           alt={project.title}
           fill
           sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-          className="object-cover transition-transform duration-500 hover:scale-105"
+          className="object-cover transition-transform duration-700 ease-out hover:scale-105"
         />
       </div>
       <div className="p-5">
         <Badge variant="neutral" className="capitalize">
           {project.sector}
         </Badge>
-        <h3 className="mt-3 font-display text-h4 text-charcoal">{project.title}</h3>
+        <h3 className="mt-3 text-h4 text-charcoal">{project.title}</h3>
         <p className="mt-1 text-sm text-neutral-500">{project.location}</p>
       </div>
     </Card>

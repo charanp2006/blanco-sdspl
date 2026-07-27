@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Inter, Plus_Jakarta_Sans, IBM_Plex_Mono } from "next/font/google";
 import "@/styles/globals.css";
 import { MotionConfig } from "framer-motion";
 import { Header } from "@/components/layout/Header";
@@ -10,25 +9,7 @@ import { ToastProvider } from "@/components/ui/Toast";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { organizationSchema, localBusinessSchema } from "@/lib/structuredData";
 import { brand } from "@/constants/brand";
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
-
-const plusJakarta = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  variable: "--font-plus-jakarta",
-  display: "swap",
-});
-
-const plexMono = IBM_Plex_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  variable: "--font-plex-mono",
-  display: "swap",
-});
+import { fontVariables } from "@/lib/fonts";
 
 export const metadata: Metadata = {
   metadataBase: new URL(brand.contact.website),
@@ -44,7 +25,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${plusJakarta.variable} ${plexMono.variable}`}>
+    <html lang="en" className={fontVariables}>
       <body>
         <JsonLd data={organizationSchema()} />
         <JsonLd data={localBusinessSchema()} />

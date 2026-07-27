@@ -94,11 +94,11 @@ export function Modal({
             initial={{ opacity: 0, scale: 0.96, y: 12 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 12 }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
             className="max-h-[85vh] w-full max-w-lg overflow-y-auto rounded-card bg-white p-6 shadow-card-hover focus:outline-none"
           >
             <div className="flex items-center justify-between">
-              <h2 id={titleId} className="font-display text-h4 text-charcoal">
+              <h2 id={titleId} className="text-h4 text-charcoal">
                 {title}
               </h2>
               <button

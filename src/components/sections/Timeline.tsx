@@ -23,7 +23,7 @@ export function Timeline({ entries }: { entries: TimelineEntry[] }) {
             className="relative"
           >
             <span className="absolute -left-6 top-1 h-3 w-3 rounded-full border-2 border-brand bg-white" aria-hidden />
-            <p className="font-mono text-sm font-semibold text-brand">{entry.year}</p>
+            <p className="font-oswald text-sm font-medium text-brand">{entry.year}</p>
             <p className="mt-1 text-charcoal">{entry.label}</p>
           </motion.li>
         ))}
