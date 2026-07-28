@@ -65,7 +65,7 @@ export default function LifeAtBlancoPage() {
         <div className="container-page">
           <SectionHeading eyebrow="Office & Culture" title="A Look Inside Blanco" align="center" />
           <div className="mt-10">
-            <Gallery images={[images.office.collage, images.team.groupPhoto]} title="Life at Blanco" />
+            <Gallery items={[{ src: images.office.collage, title: "Office" }, { src: images.team.groupPhoto, title: "Team" }]} title="Life at Blanco" />
           </div>
         </div>
       </section>

@@ -14,6 +14,7 @@ import { LogoMarquee } from "@/components/sections/LogoMarquee";
 import { ServiceCard } from "@/components/ui/ServiceCard";
 import { IndustryCard } from "@/components/ui/IndustryCard";
 import { StaggerItem, StaggerReveal, RevealOnScroll } from "@/components/ui/RevealOnScroll";
+import { LightSpeedReveal } from "@/components/ui/LightSpeedReveal";
 import { Button } from "@/components/ui/Button";
 
 export const metadata = buildMetadata({
@@ -36,7 +37,7 @@ export default function HomePage() {
       {/* About Preview */}
       <section className="section-spacing">
         <div className="container-page grid items-center gap-12 md:grid-cols-2">
-          <RevealOnScroll>
+          <LightSpeedReveal from="right" delay={0.5}>
             <p className="font-oswald text-xs font-semibold uppercase tracking-[.25em] text-brand">About Blanco</p>
             <h2 className="mt-2 text-h1 text-charcoal">
               Engineering the Future of Structural Steel Detailing
@@ -55,10 +56,10 @@ export default function HomePage() {
             <Button href="/about/overview" variant="outline" className="mt-6">
               Learn About Us
             </Button>
-          </RevealOnScroll>
-          <RevealOnScroll delay={0.1} className="relative aspect-[4/3] overflow-hidden rounded-card">
+          </LightSpeedReveal>
+          <LightSpeedReveal from="left" delay={0.7} className="relative aspect-[4/3] overflow-hidden rounded-card">
             <Image src={images.office.building} alt="Blanco office" fill className="object-cover" />
-          </RevealOnScroll>
+          </LightSpeedReveal>
         </div>
       </section>
 
@@ -117,16 +118,16 @@ export default function HomePage() {
       <section className="section-spacing bg-neutral-50">
         <div className="container-page">
           <SectionHeading eyebrow="Our Tools" title="Software We Use" align="center" />
-          <RevealOnScroll delay={0.1} className="mt-10">
+          <RevealOnScroll delay={0.3} className="mt-10">
             <LogoMarquee logos={softwareTools.map((s) => ({ name: s.name, src: s.logo }))} />
           </RevealOnScroll>
         </div>
       </section>
 
       {/* Careers CTA */}
-      <section className="py-28 md:py-36">
+      <section className="py-28 md:py-36" style={{ background: "radial-gradient(ellipse at center, rgba(62,64,255,0.3) 0%, transparent 60%)" }}>
         <div className="mx-auto max-w-3xl px-4 text-center">
-          <RevealOnScroll>
+          <RevealOnScroll delay={0.2}>
             <span className="font-oswald text-xs font-semibold uppercase tracking-[.25em] text-brand">
               Join Our Team
             </span>

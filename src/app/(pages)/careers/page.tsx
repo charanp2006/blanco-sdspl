@@ -161,12 +161,12 @@ function CareerTimeline() {
             strokeLinejoin="round"
             initial={{ pathLength: 0, opacity: 0 }}
             animate={{ pathLength: progress, opacity: progress > 0 ? 1 : 0 }}
-            transition={{ duration: 2, ease: "easeInOut" }}
           />
         </svg>
 
         {careerRoles.map((node) => {
           const done = progress * 100 >= node.position;
+          const nodeProgress = Math.min(Math.max((progress * 100 - node.position + 8) / 8, 0), 1);
           const above = node.labelPosition === "above";
           return (
             <div
@@ -179,13 +179,15 @@ function CareerTimeline() {
               </div>
               <motion.div
                 className={cn(
-                  "relative z-10 flex h-[44px] w-[44px] items-center justify-center rounded-full border-[3px] bg-white transition-all duration-400",
+                  "relative z-10 flex h-[44px] w-[44px] items-center justify-center rounded-full border-[3px] bg-white",
                   above ? "order-2" : "",
                   done ? "border-success shadow-[0_0_0_4px_rgba(34,197,94,0.2)]" : "border-neutral-200 shadow-[0_0_0_4px_rgba(148,163,184,0.15)]",
                 )}
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: isVisible ? 1 : 0.8, opacity: isVisible ? 1 : 0 }}
-                transition={{ delay: (node.position / 100) * 0.5, duration: 0.4, ease: "easeOut" }}
+                animate={{
+                  scale: 0.8 + nodeProgress * 0.2,
+                  opacity: nodeProgress,
+                }}
+                transition={{ duration: 0.15, ease: "easeOut" }}
               >
                 <CircleCheckBig className={cn("h-[22px] w-[22px]", done ? "text-success" : "text-neutral-400")} strokeWidth={2.5} />
               </motion.div>
@@ -284,8 +286,9 @@ export default function CareersPage() {
           <StaggerReveal className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {benefits.map((b) => (
               <StaggerItem key={b.title} className="rounded-card border border-neutral-200 bg-white p-8 transition-all duration-500 ease-out hover:-translate-y-1 hover:border-brand-200 hover:shadow-card-hover">
-                <div className="mb-4">{b.icon}</div>
-                <h3 className="text-lg font-bold text-charcoal">{b.title}</h3>
+                <h3 className="flex items-center gap-3 text-lg font-bold text-charcoal">
+                  <span className="flex-shrink-0">{b.icon}</span> {b.title}
+                </h3>
                 <p className="mt-3 text-sm leading-relaxed text-neutral-600">{b.desc}</p>
               </StaggerItem>
             ))}
@@ -362,7 +365,7 @@ export default function CareersPage() {
       </section>
 
       {/* ── Contact HR ── */}
-      <section className="py-28 md:py-36">
+      <section className="py-28 md:py-36" style={{ background: "radial-gradient(ellipse at center, rgba(62,64,255,0.3) 0%, transparent 60%)" }}>
         <div className="mx-auto max-w-3xl px-4 text-center">
           <RevealOnScroll>
             <span className="font-oswald text-xs font-semibold uppercase tracking-[.25em] text-brand">For More Information</span>

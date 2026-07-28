@@ -11,6 +11,15 @@ import { images } from "@/constants/images";
 import { brand } from "@/constants/brand";
 import { MobileNav } from "@/components/layout/MobileNav";
 
+const fadeDown = {
+  hidden: { opacity: 0, y: -12 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.08, duration: 0.5, ease: [0.25, 0.1, 0.25, 1] },
+  }),
+};
+
 function NavLink({ item, isActive }: { item: typeof primaryNav[number]; isActive: boolean }) {
   return (
     <Link
@@ -45,78 +54,97 @@ export function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-40 border-b border-neutral-100 bg-white backdrop-blur">
-      <div className="flex h-20 items-center justify-between width-full max-w-[1280px] px-4 py-2 mx-auto">
-        <Link href="/" className="flex items-center gap-2" aria-label={brand.name}>
-          <Image src={images.brand.logo} alt="Blanco Logo" width={480} height={480} className="h-12 w-auto object-contain rounded-[50%] p-[1.5px] bg-[#3e4095]" />
-          <div className="flex flex-col leading-none ">
-            <span className="font-montserrat text-xl font-black leading-tight tracking-[0.01em]">{brand.brandName}</span>
-            <span className="font-oswald text-[11px] font-extrabold text-[#3e4095] tracking-[0.09em] uppercase">{brand.service}</span>
-          </div>
-        </Link>
+    <>
+      <header className="sticky top-0 z-40 border-b border-neutral-100 bg-white backdrop-blur">
+        <div className="flex h-20 items-center justify-between width-full max-w-[1280px] px-4 py-2 mx-auto">
+          {/* Logo */}
+          <motion.div custom={0} variants={fadeDown} initial="hidden" animate="visible">
+            <Link href="/" className="flex items-center gap-2" aria-label={brand.name}>
+              <Image src={images.brand.logo} alt="Blanco Logo" width={480} height={480} className="h-12 w-auto object-contain rounded-[50%] p-[1.5px] bg-[#3e4095]" />
+              <div className="flex flex-col leading-none ">
+                <span className="font-montserrat text-xl font-black leading-tight tracking-[0.01em]">{brand.brandName}</span>
+                <span className="font-oswald text-[11px] font-extrabold text-[#3e4095] tracking-[0.09em] uppercase">{brand.service}</span>
+              </div>
+            </Link>
+          </motion.div>
 
-        <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
-          {primaryNav.map((item) => (
-            <div
-              key={item.label}
-              className="relative"
-              onMouseEnter={() => item.children && setOpenMenu(item.label)}
-              onMouseLeave={() => item.children && setOpenMenu(null)}
-            >
-              <NavLink item={item} isActive={isNavActive(item)} />
+          {/* Nav */}
+          <motion.nav
+            custom={1}
+            variants={fadeDown}
+            initial="hidden"
+            animate="visible"
+            className="hidden items-center gap-1 lg:flex"
+            aria-label="Primary"
+          >
+            {primaryNav.map((item) => (
+              <div
+                key={item.label}
+                className="relative"
+                onMouseEnter={() => item.children && setOpenMenu(item.label)}
+                onMouseLeave={() => item.children && setOpenMenu(null)}
+              >
+                <NavLink item={item} isActive={isNavActive(item)} />
 
-              <AnimatePresence>
-                {item.children && openMenu === item.label && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 8 }}
-                    transition={{ duration: 0.25, ease: "easeOut" }}
-                    className="absolute left-0 top-full grid w-80 gap-1 rounded-card border border-neutral-100 bg-white p-3 shadow-card-hover"
-                  >
-                    {item.children.map((child) => {
-                      const childActive = pathname === child.href;
-                      return (
-                        <Link
-                          key={child.href}
-                          href={child.href}
-                          className={`rounded-md px-3 py-2.5 hover:bg-brand-50 font-outfit ${childActive ? "bg-brand-50" : ""}`}
-                        >
-                          <span className={`block text-sm font-semibold ${childActive ? "text-brand" : "text-charcoal"}`}>{child.label}</span>
-                          {child.description && (
-                            <span className="block text-xs text-neutral-500">{child.description}</span>
-                          )}
-                        </Link>
-                      );
-                    })}
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                <AnimatePresence>
+                  {item.children && openMenu === item.label && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 12, scale: 0.97 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 8, scale: 0.98 }}
+                      transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
+                      className="absolute left-0 top-full grid w-80 gap-1 rounded-card border border-neutral-100 bg-white p-3 shadow-card-hover"
+                    >
+                      {item.children.map((child) => {
+                        const childActive = pathname === child.href;
+                        return (
+                          <Link
+                            key={child.href}
+                            href={child.href}
+                            className={`rounded-md px-3 py-2.5 hover:bg-brand-50 font-outfit ${childActive ? "bg-brand-50" : ""}`}
+                          >
+                            <span className={`block text-sm font-semibold ${childActive ? "text-brand" : "text-charcoal"}`}>{child.label}</span>
+                            {child.description && (
+                              <span className="block text-xs text-neutral-500">{child.description}</span>
+                            )}
+                          </Link>
+                        );
+                      })}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            ))}
+          </motion.nav>
+
+          {/* Search */}
+          <motion.div custom={2} variants={fadeDown} initial="hidden" animate="visible" className="hidden items-center gap-3 lg:flex">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-400" aria-hidden />
+              <input
+                type="text"
+                placeholder="Search..."
+                className="h-10 w-56 rounded-pill tracking-wide border border-neutral-600 bg-neutral-50 pl-10 pr-4 text-sm font-oswald text-charcoal placeholder-neutral-400 outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/20"
+              />
             </div>
-          ))}
-        </nav>
+          </motion.div>
 
-        <div className="hidden items-center gap-3 lg:flex">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-400" aria-hidden />
-            <input
-              type="text"
-              placeholder="Search..."
-              className="h-10 w-56 rounded-pill tracking-wide border border-neutral-600 bg-neutral-50 pl-10 pr-4 text-sm font-oswald text-charcoal placeholder-neutral-400 outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/20"
-            />
-          </div>
+          {/* Hamburger */}
+          <motion.button
+            custom={2}
+            variants={fadeDown}
+            initial="hidden"
+            animate="visible"
+            className="rounded-md p-2 text-charcoal lg:hidden"
+            aria-label="Open menu"
+            onClick={() => setMobileOpen(true)}
+          >
+            <Menu className="h-6 w-6" aria-hidden />
+          </motion.button>
         </div>
-
-        <button
-          className="rounded-md p-2 text-charcoal lg:hidden"
-          aria-label="Open menu"
-          onClick={() => setMobileOpen(true)}
-        >
-          <Menu className="h-6 w-6" aria-hidden />
-        </button>
-      </div>
+      </header>
 
       <MobileNav open={mobileOpen} onClose={() => setMobileOpen(false)} />
-    </header>
+    </>
   );
 }

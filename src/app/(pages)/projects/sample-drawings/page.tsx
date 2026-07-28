@@ -10,8 +10,6 @@ export const metadata = buildMetadata({
   path: "/projects/sample-drawings",
 });
 
-// 🔶 Placeholder gallery — reuses project render images until real sample
-// shop/erection drawing exports are supplied by the client.
 export default function SampleDrawingsPage() {
   return (
     <>
@@ -22,10 +20,10 @@ export default function SampleDrawingsPage() {
       />
       <section className="section-spacing">
         <div className="container-page">
-          <Gallery images={projects.map((p) => p.thumbnail)} title="Sample Drawings" />
-          <p className="mt-6 text-xs text-neutral-400">
-            🔶 Showing project renders as placeholders — replace with exported shop/erection drawing sheets.
-          </p>
+          <Gallery
+            items={projects.map((p) => ({ src: p.thumbnail, title: p.title }))}
+            title="Sample Drawings"
+          />
         </div>
       </section>
     </>

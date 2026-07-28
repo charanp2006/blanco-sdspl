@@ -3,15 +3,15 @@ export const EASE_IN_OUT = [0.4, 0, 0.2, 1] as const;
 export const SMOOTH = [0.25, 0.1, 0.25, 1] as const;
 
 export const DURATION = {
-  fast: 0.3,
-  base: 0.5,
-  slow: 0.7,
+  fast: 0.5,
+  base: 0.7,
+  slow: 0.9,
 } as const;
 
 export const STAGGER = {
-  tight: 0.08,
-  base: 0.12,
-  loose: 0.18,
+  tight: 0.12,
+  base: 0.18,
+  loose: 0.25,
 } as const;
 
 export const pageTransitionVariants = {

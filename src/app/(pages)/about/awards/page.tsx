@@ -4,6 +4,7 @@ import { InnerPageHero } from "@/components/sections/InnerPageHero";
 import { SectionHeading } from "@/components/sections/SectionHeading";
 import { Timeline } from "@/components/sections/Timeline";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
+import { ImageMarquee } from "@/components/sections/ImageMarquee";
 import { milestones, awards } from "@/content/team";
 import { ShieldCheck } from "lucide-react";
 
@@ -12,6 +13,17 @@ export const metadata = buildMetadata({
   description: "Certifications, achievements, and milestones from Blanco Steel Detailing Services.",
   path: "/about/awards",
 });
+
+const awardImages = [
+  { src: "https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?w=640&h=440&fit=crop", alt: "Excellence in Steel Detailing Award" },
+  { src: "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=640&h=440&fit=crop", alt: "Best Workplace Culture" },
+  { src: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=640&h=440&fit=crop", alt: "Industry Innovation Recognition" },
+  { src: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=640&h=440&fit=crop", alt: "Quality Compliance Certificate" },
+  { src: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=640&h=440&fit=crop", alt: "Outstanding Project Delivery" },
+  { src: "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=640&h=440&fit=crop", alt: "Top Employer Award" },
+  { src: "https://images.unsplash.com/photo-1497215842964-222b430dc094?w=640&h=440&fit=crop", alt: "Corporate Excellence Trophy" },
+  { src: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=640&h=440&fit=crop", alt: "Safety & Compliance Shield" },
+];
 
 export default function AwardsPage() {
   return (
@@ -47,6 +59,21 @@ export default function AwardsPage() {
             <div className="mt-8">
               <Timeline entries={milestones} />
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Awards Gallery Marquee */}
+      <section className="section-spacing bg-neutral-50">
+        <div className="container-page">
+          <SectionHeading
+            eyebrow="Our Achievements"
+            title="Awards Gallery"
+            description="A glimpse of the recognitions and accolades earned by our team."
+            align="center"
+          />
+          <div className="mt-10">
+            <ImageMarquee images={awardImages} />
           </div>
         </div>
       </section>

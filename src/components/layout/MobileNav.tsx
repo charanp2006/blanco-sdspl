@@ -10,6 +10,51 @@ import { cn } from "@/lib/utils";
 const FOCUSABLE_SELECTOR =
   'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
+const panelVariants = {
+  hidden: { x: "100%", opacity: 0.5 },
+  visible: {
+    x: 0,
+    opacity: 1,
+    transition: { type: "spring", stiffness: 300, damping: 30 },
+  },
+  exit: {
+    x: "100%",
+    opacity: 0,
+    transition: { type: "spring", stiffness: 300, damping: 30 },
+  },
+};
+
+const backdropVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.3 } },
+  exit: { opacity: 0, transition: { duration: 0.25 } },
+};
+
+const navItemVariants = {
+  hidden: { x: 30, opacity: 0 },
+  visible: (i: number) => ({
+    x: 0,
+    opacity: 1,
+    transition: { delay: 0.1 + i * 0.04, duration: 0.35, ease: "easeOut" },
+  }),
+};
+
+const childVariants = {
+  hidden: { x: 10, opacity: 0, height: 0 },
+  visible: {
+    x: 0,
+    opacity: 1,
+    height: "auto",
+    transition: { duration: 0.25, ease: "easeOut" },
+  },
+  exit: {
+    x: 10,
+    opacity: 0,
+    height: 0,
+    transition: { duration: 0.2, ease: "easeIn" },
+  },
+};
+
 export function MobileNav({ open, onClose }: { open: boolean; onClose: () => void }) {
   const [expanded, setExpanded] = useState<string | null>(null);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -57,82 +102,108 @@ export function MobileNav({ open, onClose }: { open: boolean; onClose: () => voi
   }, [open]);
 
   return (
-    <>
-      {/* Backdrop — always in DOM, visibility controlled by AnimatePresence */}
-      <AnimatePresence>
-        {open && (
+    <AnimatePresence>
+      {open && (
+        <>
           <motion.div
             key="backdrop"
             className="fixed inset-0 z-40 bg-charcoal/50 lg:hidden"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            variants={backdropVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
             onClick={onClose}
             aria-hidden
           />
-        )}
-      </AnimatePresence>
+          <motion.div
+            ref={panelRef}
+            key="panel"
+            className="fixed inset-y-0 right-0 z-50 w-full max-w-xs overflow-y-auto bg-white p-6 focus:outline-none lg:hidden"
+            variants={panelVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Mobile navigation"
+            tabIndex={-1}
+          >
+            <motion.div
+              className="flex justify-end"
+              initial={{ opacity: 0, scale: 0.8, rotate: -90 }}
+              animate={{ opacity: 1, scale: 1, rotate: 0 }}
+              transition={{ delay: 0.25, duration: 0.3, ease: "easeOut" }}
+            >
+              <button
+                onClick={onClose}
+                aria-label="Close menu"
+                className="rounded-full p-2 text-charcoal hover:bg-neutral-100 transition-colors"
+              >
+                <X className="h-6 w-6" aria-hidden />
+              </button>
+            </motion.div>
 
-      {/* Panel — always in DOM, slides in/out */}
-      <div
-        ref={panelRef}
-        className={cn(
-          "fixed inset-y-0 right-0 z-50 w-full max-w-xs overflow-y-auto bg-white p-6 focus:outline-none lg:hidden transition-transform duration-350 ease-[cubic-bezier(0.25,0.1,0.25,1)]",
-          open ? "translate-x-0" : "translate-x-full"
-        )}
-        role="dialog"
-        aria-modal="true"
-        aria-label="Mobile navigation"
-        tabIndex={-1}
-      >
-        <div className="flex justify-end">
-          <button onClick={onClose} aria-label="Close menu" className="rounded-md p-2 text-charcoal">
-            <X className="h-6 w-6" aria-hidden />
-          </button>
-        </div>
-
-        <nav className="mt-4 flex flex-col gap-1">
-          {primaryNav.map((item) => (
-            <div key={item.label}>
-              <div className="flex items-center justify-between">
-                <Link
-                  href={item.href}
-                  onClick={onClose}
-                  className="flex-1 py-3 text-base font-semibold text-charcoal"
+            <nav className="mt-6 flex flex-col gap-1">
+              {primaryNav.map((item, i) => (
+                <motion.div
+                  key={item.label}
+                  custom={i}
+                  variants={navItemVariants}
+                  initial="hidden"
+                  animate="visible"
                 >
-                  {item.label}
-                </Link>
-                {item.children && (
-                  <button
-                    onClick={() => setExpanded(expanded === item.label ? null : item.label)}
-                    aria-expanded={expanded === item.label}
-                    className="p-3 text-charcoal"
-                  >
-                    <ChevronDown
-                      className={cn("h-4 w-4 transition-transform", expanded === item.label && "rotate-180")}
-                      aria-hidden
-                    />
-                  </button>
-                )}
-              </div>
-              {item.children && expanded === item.label && (
-                <div className="ml-3 flex flex-col gap-1 border-l border-neutral-200 pl-3">
-                  {item.children.map((child) => (
+                  <div className="flex items-center justify-between border-b border-neutral-100">
                     <Link
-                      key={child.href}
-                      href={child.href}
+                      href={item.href}
                       onClick={onClose}
-                      className="py-2 text-sm text-neutral-600"
+                      className="flex-1 py-3.5 text-base font-semibold text-charcoal hover:text-brand transition-colors"
                     >
-                      {child.label}
+                      {item.label}
                     </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
-        </nav>
-      </div>
-    </>
+                    {item.children && (
+                      <button
+                        onClick={() => setExpanded(expanded === item.label ? null : item.label)}
+                        aria-expanded={expanded === item.label}
+                        className="p-3 text-charcoal hover:text-brand transition-colors"
+                      >
+                        <ChevronDown
+                          className={cn(
+                            "h-4 w-4 transition-transform duration-300",
+                            expanded === item.label && "rotate-180"
+                          )}
+                          aria-hidden
+                        />
+                      </button>
+                    )}
+                  </div>
+                  <AnimatePresence>
+                    {item.children && expanded === item.label && (
+                      <motion.div
+                        variants={childVariants}
+                        initial="hidden"
+                        animate="visible"
+                        exit="exit"
+                        className="ml-3 flex flex-col gap-1 border-l-2 border-brand/30 pl-3 overflow-hidden"
+                      >
+                        {item.children.map((child) => (
+                          <Link
+                            key={child.href}
+                            href={child.href}
+                            onClick={onClose}
+                            className="py-2 text-sm text-neutral-600 hover:text-brand transition-colors"
+                          >
+                            {child.label}
+                          </Link>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              ))}
+            </nav>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
   );
 }
