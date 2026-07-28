@@ -1,58 +1,115 @@
-# Blanco Steel Detailing Services — Website (Phase 2 Scaffold)
+# Blanco Steel Detailing Services — Corporate Website
 
-Next.js 15 / React 19 / TypeScript / Tailwind project scaffold. This is the
-**Phase 2** deliverable: folder structure, config, design tokens, and typed
-content modules. Components (Phase 3) and full pages (Phase 4) are not yet
-built — `src/app/page.tsx` is a placeholder so the project runs.
+Next.js 15 / React 19 / TypeScript / Tailwind CSS / Framer Motion corporate
+information website for Blanco Steel Detailing Services Pvt. Ltd., Mysore, India.
 
-## Scope note (applies to all later phases)
-Per client feedback after Phase 1: **Blanco is a structural steel detailing
-company only** — not a multi-discipline BIM/design practice. All content in
-`src/content/services.ts` reflects that: five detailing-focused services,
-built around **Tekla Structures** as the primary platform and **AISC**
-compliance as the core credibility claim. (Phase 1 document itself is left
-unedited, as instructed — this note is the source of truth going forward.)
+## Scope
 
-## Getting started
+**Blanco is a structural steel detailing company only** — not a multi-discipline
+BIM/design practice. Five services, built around **Tekla Structures** as the
+primary platform and **AISC** compliance as the core credibility claim.
+
+The site serves as a digital presence — informational, not marketing-focused —
+showcasing services, team, projects, and career opportunities.
+
+## Tech Stack
+
+- **Framework:** Next.js 15 (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS
+- **Animation:** Framer Motion + vanilla `requestAnimationFrame`
+- **Forms:** React Hook Form + Zod validation
+- **Icons:** Lucide React
+
+## Getting Started
+
 ```bash
 npm install
 npm run dev
 ```
 
-## What's in this phase
+## Scripts
 
-| Area | Files |
+| Command | Description |
 |---|---|
-| Config | `package.json`, `tsconfig.json`, `next.config.ts`, `tailwind.config.ts`, `postcss.config.mjs`, `eslint.config.mjs`, `.prettierrc` |
-| Design tokens | `tailwind.config.ts` (colors/type/radius/spacing), `src/styles/globals.css` |
-| Fonts | Wired in `src/app/layout.tsx` (Inter, Plus Jakarta Sans, IBM Plex Mono) |
-| Routing skeleton | `src/app/(marketing)/**` route folders for every page in the Phase 1 sitemap |
-| Types | `src/types/index.ts` |
-| Constants | `src/constants/brand.ts`, `nav.ts`, `images.ts` |
-| Content (typed, brochure-sourced) | `src/content/services.ts`, `software.ts`, `company.ts` |
-| Validation | `src/lib/validations.ts` (Zod schemas for Contact/Quote/Application/Newsletter) |
-| SEO helper | `src/lib/seo.ts`, `src/app/sitemap.ts`, `src/app/robots.ts` |
-| Real assets copied in | `public/images/**` (logo, office, team, 6 project renders, 5 software logos) — sourced from `BLANCO_ASSETS.zip` |
+| `npm run dev` | Start development server |
+| `npm run build` | Production build |
+| `npm run start` | Start production server |
+| `npm run lint` | Run ESLint |
+| `npm run analyze` | Bundle analysis via `@next/bundle-analyzer` |
 
-## Folder structure
+## Project Structure
+
 ```
 src/
-├── app/(marketing)/...     route folders per Phase 1 §4 sitemap
-├── components/{layout,ui,sections,forms}/   empty — Phase 3
-├── features/{project-filters,job-application,blog-search}/  empty — Phase 4
-├── hooks/                  empty — Phase 3+
-├── lib/                    utils.ts, validations.ts, seo.ts
-├── types/                  index.ts
-├── constants/              brand.ts, nav.ts, images.ts
-├── content/                services.ts, software.ts, company.ts
-└── styles/                 globals.css
+├── app/
+│   ├── (pages)/...           Route group — About, Services, Projects, Careers, Blog, Contact, Privacy Policy
+│   ├── layout.tsx            Root layout with font declarations
+│   ├── template.tsx          Page-level fade/slide transitions
+│   ├── page.tsx              Homepage
+│   ├── sitemap.ts            Dynamic sitemap
+│   ├── robots.ts             Dynamic robots
+│   └── *.webp                Brand logos and favicon
+├── components/
+│   ├── layout/               Header, Footer, MobileNav, Breadcrumbs, ScrollProgressBar, BackToTopButton
+│   ├── sections/             Hero, InnerPageHero, SectionHeading, StatCounterSection, ProcessSteps,
+│   │                         Timeline, LogoMarquee, ImageMarquee, Gallery
+│   ├── ui/                   Button, Card, Accordion, Modal, RevealOnScroll, LightSpeedReveal,
+│   │                         IndustryCard, ServiceCard, AnimatedCounter, Toast, etc.
+│   └── forms/                FormField, ContactForm, QuoteRequestForm, JobApplicationForm
+├── content/                  Typed content modules (services, software, company, team, careers, projects)
+├── constants/                Brand info, navigation, image paths
+├── hooks/                    Custom hooks (useMediaQuery, useCountUp, useScrollProgress, etc.)
+├── lib/                      Fonts, motion tokens, utils, validations, SEO, structured data
+├── types/                    TypeScript interfaces
+└── styles/                   Global CSS, Tailwind utilities
 ```
 
-## Open items still needing client input (carried from Phase 1 §"Open Items")
-Ongoing-project count and headcount in `src/content/company.ts` are marked
-🔶 placeholder — confirm exact figures before Phase 4 content freeze.
+## Key Features
 
-## Next: Phase 3
-Build the reusable component library (Header/mega-menu, Footer, Hero,
-Card family, Forms, Accordion/Tabs/Carousel, Stat counter) against these
-tokens and content modules.
+- **Homepage:** Auto-cycling hero carousel (Ken Burns effect), 3D flipping service cards, industry image cards, stat counters, software expertise marquee, careers CTA with radial gradient
+- **About pages:** Overview (team photo + expertise), Awards (certifications + timeline + awards gallery marquee), Our Team (team overview + departments), Life at Blanco
+- **Services:** Dynamic `[slug]` route with 5 structural steel detailing services
+- **Projects:** Filterable completed projects, Tekla Models gallery, Sample Drawings gallery — all with title overlays on hover
+- **Careers:** Career advancement timeline (synced traveling line + circle icons), benefits grid (inline icons), statutory/other benefits, application form
+- **Contact:** Two-column layout (info cards + map + form) with styled success state
+- **Privacy Policy:** Full content with animated section reveals
+
+## Animation System
+
+- **Shared tokens** (`src/lib/motion.ts`): Duration (0.5s/0.7s/0.9s), stagger (0.12s/0.18s/0.25s), easing curves
+- **Header:** Staggered fade-down entrance, smooth dropdown with scale + slide, animated active underline via `layoutId`
+- **MobileNav:** Framer-motion spring slide-in with staggered items, accordion animations
+- **Marquees:** DOM-recycled infinite scroll via `requestAnimationFrame`, smooth lerp deceleration on hover
+- **LightSpeed:** Skew + translateX entrance animation (used on about preview and team overview)
+- **Timeline:** SVG traveling line synced with circle icon color changes via shared progress state
+- **Cards:** CSS 3D flip animation (ServiceCard), smooth hover transitions (Card, ProjectCard)
+- **Reduced motion:** Respected globally via CSS + component-level handling
+
+## Design System
+
+| Font | Weight | Usage |
+|---|---|---|
+| Montserrat | 900 | Headings h1–h4 |
+| Oswald | 500 | Nav links, buttons, eyebrows |
+| Outfit | 400 | Body text |
+| DM Mono | 400 | Quote text |
+
+| Color | Hex | Usage |
+|---|---|---|
+| Brand (Indigo) | `#3E4096` | Primary actions, text, borders |
+| Charcoal | `#292929` | Headings, body text |
+| Accent (Amber) | `#F2A900` | CTA-only |
+
+## Performance
+
+| Route | First Load JS |
+|---|---|
+| Gallery pages (Tekla/Samples) | ~113 kB |
+| Static pages (Awards, Overview) | ~144–148 kB |
+| Dynamic pages (Careers, Contact) | ~177–179 kB |
+| Shared JS | ~103 kB |
+
+## SRS Document
+
+Full technical specification: [`Blanco_Website_SRS_TechnicalDesign_v2_AsBuilt.md`](./Blanco_Website_SRS_TechnicalDesign_v2_AsBuilt.md)
