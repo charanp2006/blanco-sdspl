@@ -94,7 +94,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         </div>
       </section>
 
-      <section className="section-spacing bg-brand py-16 text-center text-white">
+      {/* <section className="section-spacing bg-brand py-16 text-center text-white">
         <div className="container-page">
           <h2 className="text-h2">Learn more about {service.name.toLowerCase()}</h2>
           <a
@@ -104,10 +104,10 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
             Contact Us
           </a>
         </div>
-      </section>
+      </section> */}
 
-      <section className="section-spacing">
-        <div className="container-page max-w-3xl">
+      <section className="section-spacing bg-brand-50/40 py-16">
+        <div className="container-page max-w-3xl text-center">
           <SectionHeading eyebrow="Common Questions" title="FAQs" />
           <div className="mt-8">
             <Accordion items={service.faqs} />
@@ -116,7 +116,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       </section>
 
       {related.length > 0 && (
-        <section className="section-spacing bg-neutral-50">
+        <section className="section-spacing">
           <div className="container-page">
             <SectionHeading eyebrow="Explore More" title="Related Services" />
             <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

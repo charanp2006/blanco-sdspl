@@ -301,7 +301,7 @@ export default function AboutOverviewPage() {
       </section>
 
       {/* ── Careers CTA ── */}
-      <section className="py-28 md:py-36">
+      <section className="py-28 md:py-36" style={{ background: "radial-gradient(ellipse at center, rgba(62,64,255,0.3) 0%, transparent 60%)" }}>
         <div className="mx-auto max-w-3xl px-4 text-center">
           <RevealOnScroll>
             <span className="font-oswald text-xs font-semibold uppercase tracking-[.25em] text-brand">

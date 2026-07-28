@@ -22,7 +22,10 @@ export default function TeklaModelsPage() {
       />
       <section className="section-spacing">
         <div className="container-page">
-          <Gallery images={teklaProjects.map((p) => p.thumbnail)} title="Tekla Models" />
+          <Gallery
+            items={teklaProjects.map((p) => ({ src: p.thumbnail, title: p.title }))}
+            title="Tekla Models"
+          />
         </div>
       </section>
     </>
